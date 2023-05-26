@@ -20,12 +20,22 @@
         </pre>
     </div>
 
-    <div class="project_language">
-        <div>- {{$project->languages}} -</div>
+    <div class="project_thumb">
+        <img class="img-thumbnail mb-3" src="{{$project->thumb}}" alt="">
     </div>
-    
+
     <div class="project_type">
         <div>Type: {{$project->type->title ?? 'Unknown'}}</div>
+    </div>
+
+    <div class="project_tech">
+
+        <span class="me-2">Technologies: </span>
+
+        @foreach($project->technologies as $technology)
+        <span class="badge rounded-pill mx-1" style="background-color: {{$technology->color}};">{{$technology->name}}</span>
+        @endforeach
+
     </div>
 
     <div class="button my-2">

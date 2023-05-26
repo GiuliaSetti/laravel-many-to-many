@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 
 use App\Models\Type;
+use App\Models\Technology;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -35,7 +36,12 @@ class ProjectController extends Controller
     {
         //
         $types = Type::all();
-        return view('admin.projects.create', compact('types'));
+
+        $technologies = Technology::all();
+        
+        return view('admin.projects.create', compact('types', 'technologies'));
+
+        
     }
 
     /**
@@ -57,6 +63,10 @@ class ProjectController extends Controller
         $project->fill($formData);
 
         $project->save(); 
+
+        if(array_key_exists('technologiesArray', $formData)){
+            $project->technologies()->attach($formData['technologiesArray']);
+        }
 
         return redirect()->route('admin.projects.show', $project->slug);
     }
@@ -85,7 +95,9 @@ class ProjectController extends Controller
         //
         $types = Type::all();
 
-        return view('admin.projects.edit', compact('project', 'types'));
+        $technologies = Technology::all();
+
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -103,6 +115,12 @@ class ProjectController extends Controller
         $formData = $request->all();
 
         $project->update($formData);
+
+        if(array_key_exists('technologiesArray', $formData)){
+            $project->technologies()->sync($formData['technologiesArray']);
+        } else {
+            $project->technologies()->detach();
+        }
 
         return redirect()->route('admin.projects.show', $project->slug);
     }
@@ -130,7 +148,6 @@ class ProjectController extends Controller
                 'description' => 'required|max:255',
                 'type_id' => 'nullable|exists:types,id',
                 'thumb' => 'required',
-                'languages' => 'required',
                 'repository' => 'required',
 
             ], [
@@ -141,7 +158,6 @@ class ProjectController extends Controller
                 'description.max' => 'Description field cannot be longer than 255 characters.',
                 'type_id.exists' => 'Select a category between those available',
                 'thumb.required' => "Thumbnail path is mandatory.",
-                'languages.required' => "Languages field is mandatory.",
                 'repository.required' => "Repository's name field is mandatory."
     
             ])->validate();

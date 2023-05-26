@@ -20,7 +20,6 @@ return new class extends Migration
             $table->text('description');
             $table->string('slug', 200);
             $table->text('thumb');
-            $table->string('languages');
             $table->string('repository');
 
             $table->timestamps();

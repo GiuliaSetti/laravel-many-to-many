@@ -41,17 +41,7 @@
                 @enderror
             </div>
 
-            <div class="m-2">
-                <label for="languages">Languages:</label>
-                <input class="mx-3 form-control @error('languages') is-invalid @enderror" type="text" id="languages" name="languages" value="{{old('languages')}}" required>
-
-                @error('languages')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-
+            <!-- TYPES -->
             <div class="m-2">
                 <label for="type_id">Category:</label>
                 <select name="type_id" class="mx-3 form-select @error('type_id') is-invalid @enderror" type="text" id="type_id" value="{{old('type_id')}}">
@@ -67,6 +57,21 @@
                     </div>
                 @enderror
             </div>
+
+            <!-- TECHS -->
+            <div class="m-2 d-flex">
+                Technologies:
+
+                @foreach($technologies as $technology)
+                    <div class="form-check">
+                        <input type="checkbox" id="technology-{{$technology->id}}" name="technologiesArray[]" value="{{$technology->id}}">
+                        <label for="technology-{{$technology->id}}">{{$technology->name}}</label>
+                    </div>
+                @endforeach
+            </div>
+
+
+
 
             <div class="m-2">
                 <label for="repository">Repository:</label>
