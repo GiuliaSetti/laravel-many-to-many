@@ -11,7 +11,7 @@
 
             <div class="m-2">
                 <label for="title">Title:</label>
-                <input class="mx-3 form-control @error('title') is-invalid @enderror" type="text" id="title" name="title" value="{{old('title')}}" required>
+                <input class="mx-3 form-control @error('title') is-invalid @enderror" type="text" id="title" name="title" value="{{old('title') ?? $project->title}}" required>
 
                 @error('title')
                     <div class="invalid-feedback">
@@ -22,7 +22,7 @@
 
             <div class="m-2">
                 <label for="description">Description:</label>
-                <textarea class="mx-3 form-control @error('description') is-invalid @enderror" id="description" name="description" required>{{old('description')}}</textarea>
+                <textarea class="mx-3 form-control @error('description') is-invalid @enderror" id="description" name="description" required>{{old('description') ?? $project->description}}</textarea>
 
                 @error('description')
                     <div class="invalid-feedback">
@@ -33,7 +33,7 @@
 
             <div class="m-2">
                 <label for="thumb">Thumbnail:</label>
-                <input class="mx-3 form-control @error('thumb') is-invalid @enderror" type="text" id="thumb" name="thumb" value="{{old('thumb')}}" required>
+                <input class="mx-3 form-control @error('thumb') is-invalid @enderror" type="text" id="thumb" name="thumb" value="{{old('thumb') ?? $project->thumb}}" required>
 
                 @error('thumb')
                     <div class="invalid-feedback">
@@ -44,7 +44,7 @@
 
             <div class="m-2">
                 <label for="languages">Languages</label>
-                <input class="mx-3 form-control @error('languages') is-invalid @enderror" type="text" id="languages" name="languages" value="{{old('languages')}}" required>
+                <input class="mx-3 form-control @error('languages') is-invalid @enderror" type="text" id="languages" name="languages" value="{{old('languages') ?? $project->languages}}" required>
 
                 @error('languages')
                     <div class="invalid-feedback">
@@ -61,7 +61,7 @@
                     <option value="">None</option>
 
                     @foreach($types as $type) 
-                        <option value="{{$type->id}}" {{$type->id == old('type_id') ? 'selected' : ''}}>{{$type->title}}</option>
+                        <option value="{{$type->id}}" {{$type->id == old('type_id', $project->type_id) ? 'selected' : ''}}>{{$type->title}}</option>
                     @endforeach
 
                 </select>
@@ -75,7 +75,7 @@
 
             <div class="m-2">
                 <label for="repository">Repository:</label>
-                <input class="mx-3 form-control @error('github_repo') is-invalid @enderror" type="text" id="repository" name="repository" value="{{old('github_repo')}}" required>
+                <input class="mx-3 form-control @error('github_repo') is-invalid @enderror" type="text" id="repository" name="repository" value="{{old('repository') ?? $project->repository}}" required>
 
                 @error('repository')
                     <div class="invalid-feedback">
