@@ -116,6 +116,15 @@
                         <div><a href="{{route('admin.types.create')}}">ADD A NEW CATEGORY</a></div>
                     </div>
                 </aside>
+                <aside class="m-3 border rounded-2 p-3 {{str_contains(Route::currentRouteName(), 'technologies.') ? 'border-primary' : ''}}">
+                    <div>
+                        <h5>Technologies</h5>
+                        <hr>
+                        <div><a href="{{route('admin.technologies.index')}}">SHOW ALL CATEGORIES</a></div>
+                        
+                        <div><a href="{{route('admin.technologies.create')}}">ADD A NEW CATEGORY</a></div>
+                    </div>
+                </aside>
             </div>
             <main class="flex-grow-1">
                 @yield('content')

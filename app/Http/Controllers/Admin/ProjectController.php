@@ -148,6 +148,7 @@ class ProjectController extends Controller
                 'description' => 'required|max:255',
                 'type_id' => 'nullable|exists:types,id',
                 'thumb' => 'required',
+                'technologies' => 'exists:technologies,id',
                 'repository' => 'required',
 
             ], [
@@ -158,6 +159,7 @@ class ProjectController extends Controller
                 'description.max' => 'Description field cannot be longer than 255 characters.',
                 'type_id.exists' => 'Select a category between those available',
                 'thumb.required' => "Thumbnail path is mandatory.",
+                'technologies.exists' => 'Select a technology',
                 'repository.required' => "Repository's name field is mandatory."
     
             ])->validate();
