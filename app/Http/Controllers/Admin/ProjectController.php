@@ -147,7 +147,8 @@ class ProjectController extends Controller
                 'title' => 'required|min:5|max:255',
                 'description' => 'required|max:255',
                 'type_id' => 'nullable|exists:types,id',
-                'thumb' => 'required',
+                // 'thumb' => 'required',
+                'cover_image' => 'nullable|image|max:2048',
                 'technologies' => 'exists:technologies,id',
                 'repository' => 'required',
 
@@ -158,7 +159,9 @@ class ProjectController extends Controller
                 'description.required' => 'Description field is mandatory.',
                 'description.max' => 'Description field cannot be longer than 255 characters.',
                 'type_id.exists' => 'Select a category between those available',
-                'thumb.required' => "Thumbnail path is mandatory.",
+                'cover_image.image' => 'File must be an image',
+                'cover_image' => 'File must be under 2MB',
+                // 'thumb.required' => "Thumbnail path is mandatory.",
                 'technologies.exists' => 'Select a technology',
                 'repository.required' => "Repository's name field is mandatory."
     

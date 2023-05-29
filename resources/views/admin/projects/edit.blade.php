@@ -31,17 +31,6 @@
                 @enderror
             </div>
 
-            <div class="m-2">
-                <label for="thumb">Thumbnail:</label>
-                <input class="mx-3 form-control @error('thumb') is-invalid @enderror" type="text" id="thumb" name="thumb" value="{{old('thumb') ?? $project->thumb}}" required>
-
-                @error('thumb')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-
 
             <div class="m-2">
                 <label for="type_id">Category:</label>

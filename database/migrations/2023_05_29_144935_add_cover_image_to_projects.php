@@ -13,15 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('projects', function (Blueprint $table) {
-            $table->id();
-
-            $table->string('title', 200)->unique();
-            $table->text('description');
-            $table->string('slug', 200);
-            $table->string('repository');
-
-            $table->timestamps();
+        Schema::table('projects', function (Blueprint $table) {
+            //
+            $table->string('cover_image')->nullable()->after('slug');
         });
     }
 
@@ -32,6 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('projects');
+        Schema::table('projects', function (Blueprint $table) {
+            //
+            $table->dropColumn('cover_image');
+        });
     }
 };

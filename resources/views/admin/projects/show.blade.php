@@ -20,10 +20,6 @@
         </pre>
     </div>
 
-    <div class="project_thumb">
-        <img class="img-thumbnail mb-3" src="{{$project->thumb}}" alt="">
-    </div>
-
     <div class="project_type">
         <div>Type: {{$project->type->title ?? 'Unknown'}}</div>
     </div>

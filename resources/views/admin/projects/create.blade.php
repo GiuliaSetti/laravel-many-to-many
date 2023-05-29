@@ -5,7 +5,7 @@
     <div class="container py-5">
         <h2>Add a Project</h2>
 
-        <form action=" {{ route('admin.projects.store') }} " method="POST">
+        <form action=" {{ route('admin.projects.store') }} " method="POST" enctype="multipart/form-data">
             @csrf 
 
             <div class="m-2">
@@ -31,16 +31,17 @@
             </div>
 
             <div class="m-2">
-                <label for="thumb">Thumbnail:</label>
-                <input class="mx-3 form-control @error('thumb') is-invalid @enderror" type="text" id="thumb" name="thumb" value="{{old('thumb')}}" required>
+                <label for="cover_image">Thumbnail:</label>
+                <input class="mx-3 form-control @error('cover_image') is-invalid @enderror" type="file" id="cover_image" name="cover_image">
 
-                @error('thumb')
+                @error('cover_image')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
             </div>
 
+    
             <!-- TYPES -->
             <div class="m-2">
                 <label for="type_id">Category:</label>
