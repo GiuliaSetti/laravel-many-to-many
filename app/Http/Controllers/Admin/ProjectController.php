@@ -11,6 +11,7 @@ use App\Models\Technology;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -54,6 +55,7 @@ class ProjectController extends Controller
     {
         //
         $this->validation($request);
+        
 
         $formData = $request->all();
 
@@ -61,6 +63,14 @@ class ProjectController extends Controller
         $project->slug = Str::slug($formData['title'], '-');
 
         $project->fill($formData);
+
+        if($request->hasFile('cover_image')){
+
+            $path = Storage::put('project_img', $request->cover_image);
+
+            $formData['cover_image'] = $path;
+        };
+
 
         $project->save(); 
 
@@ -116,6 +126,18 @@ class ProjectController extends Controller
 
         $project->update($formData);
 
+        if($request->hasFile('cover_image')) {
+
+            if($project->cover_image) {
+                Storage::delete($project->cover_image);
+            }
+
+            $path = Storage::put('project_img', $request->cover_image);
+
+            $formData['cover_image'] = $path;
+
+        }
+
         if(array_key_exists('technologiesArray', $formData)){
             $project->technologies()->sync($formData['technologiesArray']);
         } else {
@@ -135,6 +157,11 @@ class ProjectController extends Controller
     {
         //
         $project->delete();
+
+        if($project->cover_image) {
+            Storage::delete($project->cover_image);
+        }
+
 
         return redirect()->route('admin.projects.index');
     }

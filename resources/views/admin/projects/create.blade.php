@@ -48,7 +48,7 @@
                 <select name="type_id" class="mx-3 form-select @error('type_id') is-invalid @enderror" type="text" id="type_id" value="{{old('type_id')}}">
                     <option value="">None</option>
                     @foreach($types as $type)
-                    <option value="{{$type->id}}" {{$type->id == old('type_id') ? 'selected' : ''}}>{{$type->name}}</option>
+                    <option value="{{$type->id}}" {{$type->id == old('type_id') ? 'selected' : ''}}>{{$type->title}}</option>
                     @endforeach
                 </select>
 

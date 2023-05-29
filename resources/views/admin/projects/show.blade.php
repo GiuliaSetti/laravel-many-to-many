@@ -20,6 +20,10 @@
         </pre>
     </div>
 
+    <div class="project_thumb">
+        <img class="img-thumbnail mb-3" src="{{ asset('storage/' . $project->cover_image) }}" alt="cover_image">
+    </div>
+
     <div class="project_type">
         <div>Type: {{$project->type->title ?? 'Unknown'}}</div>
     </div>

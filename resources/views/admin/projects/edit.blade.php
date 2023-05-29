@@ -31,6 +31,19 @@
                 @enderror
             </div>
 
+            <div class="m-2">
+                <label for="cover_image">Thumbnail:</label>
+                <input class="mx-3 form-control @error('cover_image') is-invalid @enderror" type="file" id="cover_image" name="cover_image">
+
+                @error('cover_image')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+
+    
+
 
             <div class="m-2">
                 <label for="type_id">Category:</label>
